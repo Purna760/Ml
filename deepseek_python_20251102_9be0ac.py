@@ -528,41 +528,4 @@ def main():
                 
                 # Display plots
                 for target, fig in plots.items():
-                    st.plotly_chart(fig, use_container_width=True)
-                
-                # Show prediction table for the next 24 hours
-                st.subheader("📋 LSTM Prediction Values for Next 24 Hours")
-                prediction_data = []
-                
-                for hour in range(24):
-                    hour_data = {'Hour': f"Hour {hour+1}"}
-                    for target in selected_targets:
-                        value = future_predictions[target][hour]
-                        if np.isnan(value):
-                            hour_data[target] = "N/A"
-                        else:
-                            hour_data[target] = f"{value:.4f}"
-                    prediction_data.append(hour_data)
-                
-                if prediction_data:
-                    pred_df = pd.DataFrame(prediction_data)
-                    st.dataframe(pred_df)
-                    
-                    # Create JSON data
-                    st.subheader("📄 LSTM Prediction JSON Data")
-                    prediction_json = create_prediction_json(future_predictions, selected_targets)
-                    
-                    if prediction_json:
-                        # Display JSON data
-                        st.json(prediction_json)
-                        
-                        # Download JSON button
-                        download_json(prediction_json, "lstm_air_quality_predictions.json")
-                        
-                        st.success("✅ LSTM predictions generated successfully! You can download the JSON data above.")
-                    
-        except Exception as e:
-            st.error(f"Error generating LSTM predictions: {str(e)}")
-
-if __name__ == "__main__":
-    main()
+           
